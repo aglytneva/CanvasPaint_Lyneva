@@ -1,15 +1,15 @@
 package com.example.canvaspaint_lytnevaag
 
-//
-//data class ViewState(
-//    val toolsList: List<ToolItem.ToolModel>,
-//    val colorList: List<ToolItem.ColorModel>,
+
+data class ViewState(
+    val toolsList: List<ToolItem.ToolModel>,
+    val colorList: List<ToolItem.ColorModel>,
 ////    val sizeList: List<ToolItem.SizeModel>,
-//    val canvasViewState: CanvasViewState,
-//    val isPaletteVisible: Boolean,
+    val canvasViewState: CanvasViewState,
+    val isPaletteVisible: Boolean,//видимость палитры
 ////    val isBrushSizeChangerVisible: Boolean,
-//    val isToolsVisible: Boolean
-//)
+    val isToolsVisible: Boolean // видимость инструментов
+    )
 
 sealed class UiEvent : Event {
     data class OnPaletteClicked(val index: Int) : UiEvent()
@@ -20,6 +20,6 @@ sealed class UiEvent : Event {
     object OnToolbarClicked : UiEvent()
 }
 
-//sealed class DataEvent : Event {
-//    data class OnSetDefaultTools(val tool: TOOLS, val color: COLOR) : DataEvent()
-//}
+sealed class DataEvent : Event {
+    data class OnSetDefaultTools(val tool: TOOLS, val color: COLOR) : DataEvent()
+}
