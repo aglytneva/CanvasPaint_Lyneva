@@ -12,3 +12,5 @@ enum class SIZE(
         fun from(size: Int) = map[size] ?: SMALL
     }
 }
+
+//
