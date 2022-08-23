@@ -2,7 +2,6 @@ package com.example.canvaspaint_lytnevaag
 
 import androidx.annotation.ColorRes
 
-
 enum class COLOR(
     @ColorRes
     val value: Int
