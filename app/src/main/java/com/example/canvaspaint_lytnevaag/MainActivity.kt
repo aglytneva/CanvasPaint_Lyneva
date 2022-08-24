@@ -2,6 +2,7 @@ package com.example.canvaspaint_lytnevaag
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageView
 import androidx.core.view.isVisible
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,6 +26,8 @@ class MainActivity : AppCompatActivity() {
     private val palleteLayout:ToolsLayout by lazy { findViewById(R.id.paletteLayout) }
     private val toolsLayout:ToolsLayout by lazy { findViewById(R.id.toolsLayout) }
     private val ivTools:ImageView by lazy { findViewById(R.id.ivTools) }
+    private val drawView:DrawView by lazy { findViewById(R.id.viewDraw) }
+    private val clearButton:Button by lazy { findViewById(R.id.btnClear) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +47,9 @@ class MainActivity : AppCompatActivity() {
             viewModel.processUiEvent(UiEvent.OnToolbarClicked)
         }
 
+        clearButton.setOnClickListener {
+            drawView.clear()
+        }
 
     }
 
@@ -58,6 +64,7 @@ class MainActivity : AppCompatActivity() {
             render(viewState.toolsList)
             isVisible = viewState.isToolsVisible
         }
+        drawView.render(viewState.canvasViewState)
 
     }
 }

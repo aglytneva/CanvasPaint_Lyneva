@@ -1,13 +1,17 @@
 package com.example.canvaspaint_lytnevaag
 
 
-class CanvasViewModel : BaseViewModel <ViewState>() {
+class CanvasViewModel : BaseViewModel<ViewState>() {
     override fun initialViewState(): ViewState = ViewState(
 
         //функция enumValues может выдернуть все значения, которые есть в emun классе
-        colorList= enumValues<COLOR>().map { ToolItem.ColorModel (it.value) },
-        toolsList = enumValues<TOOLS>().map {ToolItem.ToolModel (it)},
-        canvasViewState = CanvasViewState(color = COLOR.GREEN, size = SIZE.MEDIUM, tools = TOOLS.PALETTE),
+        colorList = enumValues<COLOR>().map { ToolItem.ColorModel(it.value) },
+        toolsList = enumValues<TOOLS>().map { ToolItem.ToolModel(it) },
+        canvasViewState = CanvasViewState(
+            color = COLOR.BLACK,
+            size = SIZE.MEDIUM,
+            tools = TOOLS.PALETTE
+        ),
         isPaletteVisible = false,
         isToolsVisible = false
     )
@@ -44,10 +48,28 @@ class CanvasViewModel : BaseViewModel <ViewState>() {
                             }
                         }
 
-                        return previousState.copy(toolsList = toolsList)
+                        return previousState.copy(
+                            toolsList = toolsList,
+                            canvasViewState = previousState.canvasViewState.copy(tools = TOOLS.values()[event.index])
+                        )
                     }
                 }
             }
+
+            is UiEvent.OnPaletteClicked -> {
+                val selectedColor = COLOR.values()[event.index]
+                val toolsList = previousState.toolsList.map {
+                    if (it.type == TOOLS.PALETTE) {
+                        it.copy(selectedColor = selectedColor)
+                    } else{
+                        it
+                    }
+                }
+                return previousState.copy(
+                    toolsList = toolsList,
+                    canvasViewState = previousState.canvasViewState.copy (color = selectedColor))
+            }
+
             is DataEvent.OnSetDefaultTools -> {
                 val toolsList = previousState.toolsList.map { model ->
                     if (model.type == event.tool) {
@@ -58,7 +80,7 @@ class CanvasViewModel : BaseViewModel <ViewState>() {
                 }
                 return previousState.copy(toolsList = toolsList)
             }
-           else -> return null
-       }
+            else -> return null
+        }
     }
 }

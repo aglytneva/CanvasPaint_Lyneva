@@ -72,23 +72,23 @@ class DrawView @JvmOverloads constructor(
         strokeWidth = STROKE_WIDTH // и ширина default: Hairline-width (really thin)
     }
         // Рендер, рассматриваем MVI архитектуру
-//    fun render(state: CanvasViewState) {
-//        drawColor = ResourcesCompat.getColor(resources, state.color.value, null)
-//        paint.color = drawColor
-//        paint.strokeWidth = state.size.value.toFloat()
-//        if (state.tools == TOOLS.DASH) {
-//            paint.pathEffect = DashPathEffect(
-//                floatArrayOf(
-//                    state.size.value.toFloat() * 2,
-//                    state.size.value.toFloat() * 2,
-//                    state.size.value.toFloat() * 2,
-//                    state.size.value.toFloat() * 2
-//                ), 0f
-//            )
-//        } else {
-//            paint.pathEffect = null
-//        }
-//    }
+    fun render(state: CanvasViewState) {
+        drawColor = ResourcesCompat.getColor(resources, state.color.value, null)
+        paint.color = drawColor
+        paint.strokeWidth = state.size.value.toFloat()
+        if (state.tools == TOOLS.DASH) {
+            paint.pathEffect = DashPathEffect(
+                floatArrayOf(
+                    state.size.value.toFloat() * 2,
+                    state.size.value.toFloat() * 2,
+                    state.size.value.toFloat() * 2,
+                    state.size.value.toFloat() * 2
+                ), 0f
+            )
+        } else {
+            paint.pathEffect = null
+        }
+    }
 
     //Удаление и инвалидация, удаляет все что было,покрываетColor.TRANSPARENT(невидимым)
     // PorterDuff.Mode.CLEAR - очищена память

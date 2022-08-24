@@ -16,7 +16,7 @@ enum class COLOR(
 
     companion object {
         private val map = values().associateBy(COLOR::value)
-        fun from(color: Int) = map[color] ?: GREEN
+        fun from(color: Int) = map[color] ?: BLACK
     }
 }
 //

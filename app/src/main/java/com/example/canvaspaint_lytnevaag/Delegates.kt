@@ -56,7 +56,7 @@ fun toolsAdapterDelegate(
             TOOLS.PALETTE -> {
                 ivTool.setColorFilter(
                     context.resources.getColor(item.selectedColor.value, null),
-                    // PorterDuff gjpdjkztn окрасить векторную картинку в цвет, который нам нужен
+                    // PorterDuff позволяет окрасить векторную картинку в цвет, который нам нужен
                     PorterDuff.Mode.SRC_IN
                 )
             }

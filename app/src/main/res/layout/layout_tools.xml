@@ -10,6 +10,7 @@
         android:id="@+id/rvTools"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+
         >
 
     </androidx.recyclerview.widget.RecyclerView>
