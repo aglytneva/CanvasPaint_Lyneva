@@ -1,4 +1,4 @@
-package com.example.canvaspaint_lytnevaag
+package com.example.canvaspaint_lytnevaag.base
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,7 +15,7 @@ abstract class BaseViewModel<VIEW_STATE> : ViewModel() {
         updateState(event)
     }
 
-    protected fun processDataEvent(event: Event) {
+    fun processDataEvent(event: Event) {
         updateState(event)
     }
 

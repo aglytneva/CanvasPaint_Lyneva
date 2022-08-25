@@ -1,4 +1,4 @@
-package com.example.canvaspaint_lytnevaag
+package com.example.canvaspaint_lytnevaag.di
 
 import android.app.Application
 

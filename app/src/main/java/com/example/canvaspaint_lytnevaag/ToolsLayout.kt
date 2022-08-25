@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.canvaspaint_lytnevaag.data.model.ToolItem
 import com.hannesdorfmann.adapterdelegates4.ListDelegationAdapter
 
 //Кастомный вью. Cоздаем LinearLouyaut название loyaut_tools под эту кастомную вьюшку
@@ -31,6 +32,9 @@ class ToolsLayout @JvmOverloads constructor(
             onClick(it)
         },
         toolsAdapterDelegate {
+            onClick(it) },
+
+        sizeAdapterDelegate {
             onClick(it) }
 
     )

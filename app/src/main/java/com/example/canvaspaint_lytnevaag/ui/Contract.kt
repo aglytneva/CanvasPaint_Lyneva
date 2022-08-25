@@ -1,13 +1,18 @@
-package com.example.canvaspaint_lytnevaag
+package com.example.canvaspaint_lytnevaag.ui
+
+import com.example.canvaspaint_lytnevaag.base.Event
+import com.example.canvaspaint_lytnevaag.data.COLOR
+import com.example.canvaspaint_lytnevaag.data.TOOLS
+import com.example.canvaspaint_lytnevaag.data.model.ToolItem
 
 
 data class ViewState(
     val toolsList: List<ToolItem.ToolModel>,
     val colorList: List<ToolItem.ColorModel>,
-////    val sizeList: List<ToolItem.SizeModel>,
+    val sizeList: List<ToolItem.SizeModel>,
     val canvasViewState: CanvasViewState,
     val isPaletteVisible: Boolean,//видимость палитры
-////    val isBrushSizeChangerVisible: Boolean,
+    val isBrushSizeChangerVisible: Boolean,
     val isToolsVisible: Boolean // видимость инструментов
     )
 

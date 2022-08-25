@@ -1,4 +1,11 @@
-package com.example.canvaspaint_lytnevaag
+package com.example.canvaspaint_lytnevaag.ui
+
+import com.example.canvaspaint_lytnevaag.base.BaseViewModel
+import com.example.canvaspaint_lytnevaag.base.Event
+import com.example.canvaspaint_lytnevaag.data.COLOR
+import com.example.canvaspaint_lytnevaag.data.SIZE
+import com.example.canvaspaint_lytnevaag.data.TOOLS
+import com.example.canvaspaint_lytnevaag.data.model.ToolItem
 
 
 class CanvasViewModel : BaseViewModel<ViewState>() {
@@ -7,13 +14,16 @@ class CanvasViewModel : BaseViewModel<ViewState>() {
         //функция enumValues может выдернуть все значения, которые есть в emun классе
         colorList = enumValues<COLOR>().map { ToolItem.ColorModel(it.value) },
         toolsList = enumValues<TOOLS>().map { ToolItem.ToolModel(it) },
+        sizeList = enumValues<SIZE>().map { ToolItem.SizeModel(it.value) },
         canvasViewState = CanvasViewState(
             color = COLOR.BLACK,
             size = SIZE.MEDIUM,
             tools = TOOLS.PALETTE
         ),
+        isBrushSizeChangerVisible = false,
         isPaletteVisible = false,
-        isToolsVisible = false
+        isToolsVisible = false,
+
     )
 
     init {
@@ -35,7 +45,32 @@ class CanvasViewModel : BaseViewModel<ViewState>() {
                 when (event.index) {
 
                     TOOLS.PALETTE.ordinal -> {
-                        return previousState.copy(isPaletteVisible = !previousState.isPaletteVisible)
+                        if (previousState.isBrushSizeChangerVisible == true)
+                            return previousState.copy(
+                                isPaletteVisible = !previousState.isPaletteVisible,
+                                isBrushSizeChangerVisible = !previousState.isBrushSizeChangerVisible
+                            )
+                        return previousState.copy(
+                            isPaletteVisible = !previousState.isPaletteVisible
+                        )
+                    }
+
+                    TOOLS.SIZE.ordinal -> {
+                        if (previousState.isPaletteVisible == true)
+                            return previousState.copy(
+                                isBrushSizeChangerVisible = !previousState.isBrushSizeChangerVisible,
+                                isPaletteVisible = !previousState.isPaletteVisible
+                            )
+                        return previousState.copy(
+                            isBrushSizeChangerVisible = !previousState.isBrushSizeChangerVisible
+                        )
+                    }
+                    TOOLS.ERASER.ordinal -> {
+                        return previousState.copy(
+                            canvasViewState = previousState.canvasViewState.copy (
+                                color = COLOR.WHITE,
+                                tools = TOOLS.NORMAL)
+                        )
                     }
 
                     else -> {
@@ -68,6 +103,20 @@ class CanvasViewModel : BaseViewModel<ViewState>() {
                 return previousState.copy(
                     toolsList = toolsList,
                     canvasViewState = previousState.canvasViewState.copy (color = selectedColor))
+            }
+
+            is UiEvent.OnSizeClick -> {
+                val selectedSize = SIZE.values()[event.index]
+                val toolsList = previousState.toolsList.map {
+                    if (it.type == TOOLS.SIZE) {
+                        it.copy(selectedSize = selectedSize)
+                    } else{
+                        it
+                    }
+                }
+                return previousState.copy(
+                    toolsList = toolsList,
+                    canvasViewState = previousState.canvasViewState.copy (size = selectedSize))
             }
 
             is DataEvent.OnSetDefaultTools -> {

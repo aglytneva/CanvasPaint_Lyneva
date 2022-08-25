@@ -7,6 +7,9 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
 import androidx.core.content.res.ResourcesCompat
+import com.example.canvaspaint_lytnevaag.data.COLOR
+import com.example.canvaspaint_lytnevaag.data.TOOLS
+import com.example.canvaspaint_lytnevaag.ui.CanvasViewState
 import kotlin.math.abs
 
 // Рисовалка

@@ -10,47 +10,97 @@
 
     <!--  include концепция(вложение) в иерархию вставляем новый элемент
             и дать ему новое название  -->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolBar"
         android:layout_width="0dp"
-        android:layout_height="56dp"
+        android:layout_height="60dp"
+        android:elevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <!--        android:elevation="5dp"-->
 
-        <Button
-            android:id="@+id/btnClear"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CLEAR"
+            android:layout_gravity="center_vertical"
+            android:text="Canvas Paint"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/ivTools"
-            app:layout_constraintHorizontal_bias="0.059"
+            app:layout_constraintEnd_toStartOf="@+id/ivCardTools"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/ivTools"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="16dp"
-            android:padding="16dp"
-            android:src="@drawable/ic_baseline_brush_24"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnCardClear"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="4dp"
+            android:outlineSpotShadowColor="@color/fuchsia"
+            android:outlineAmbientShadowColor="@color/fuchsia"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivCardTools"
+            >
 
-            />
+
+
+            <ImageView
+                android:id="@+id/btnClear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:padding="16dp"
+                android:src="@drawable/ic_baseline_delete_forever_24" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ivCardTools"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:outlineSpotShadowColor="@color/fuchsia"
+            android:outlineAmbientShadowColor="@color/fuchsia"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/btnCardClear">
+
+            <ImageView
+                android:id="@+id/ivTools"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:padding="16dp"
+                android:src="@drawable/ic_baseline_brush_24" />
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/viewLine"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:alpha="1"
+        android:background="@color/fuchsia"
+        app:layout_constraintTop_toBottomOf="@+id/toolBar" />
 
     <com.example.canvaspaint_lytnevaag.DrawView
         android:id="@+id/viewDraw"
         android:layout_width="411dp"
         android:layout_height="678dp"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -85,7 +135,6 @@
         layout="@layout/layout_tools"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
